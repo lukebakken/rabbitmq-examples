@@ -4,7 +4,7 @@ from RabbitMQClient import RabbitMQClient
 
 def foo(body):
     print("performing long running task...")
-    time.sleep(60)
+    time.sleep(120)
     print("Finished performing task...")
 
 

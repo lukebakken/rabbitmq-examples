@@ -25,7 +25,8 @@ class RabbitMQClient:
         param = pika.ConnectionParameters(kwargs.get("host"), kwargs.get("port"), '/',
                                           pika.PlainCredentials(kwargs.get("user"), kwargs.get("password")),
                                           heartbeat=kwargs.get("heartbeat"))
-        return pika.BlockingConnection(param), pika.BlockingConnection(param).channel()
+        conn = pika.BlockingConnection(param)
+        return conn, conn.channel()
 
     def reconnect(self):
         self.connection, self.channel = self.__create_connection(heartbeat=self.heartbeat, **self.__credentials)
