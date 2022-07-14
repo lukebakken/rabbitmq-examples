@@ -69,8 +69,9 @@ try:
     for method, properties, body in channel.consume(q_name, inactivity_timeout=5):
         if (method, properties, body) == (None, None, None):
             maybe_running_threads = list(threads.values())
-            LOGGER.info("reached inactivity timeout")
-            if len(maybe_running_threads) == 0:
+            maybe_running_threads_len = len(maybe_running_threads)
+            LOGGER.info("reached inactivity timeout: %d", maybe_running_threads_len)
+            if maybe_running_threads_len == 0:
                 LOGGER.info("reached inactivity timeout and no threads are running, exiting!")
                 break
         else:
